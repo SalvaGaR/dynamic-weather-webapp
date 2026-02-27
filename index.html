@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Neo-Glass Weather</title>
+  <meta name="description" content="Tiempo en tiempo real para Valencia y España. Datos meteorológicos de Open-Meteo." />
+  <title>Tiempo Valencia · Neo-Glass Weather</title>
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -374,10 +375,10 @@
 
     <!-- Nav Tabs -->
     <div class="flex items-center gap-1" id="nav-tabs">
-      <a class="nav-link active" data-view="dashboard">Dashboard</a>
-      <a class="nav-link" data-view="forecast">Forecast</a>
+      <a class="nav-link active" data-view="dashboard">Inicio</a>
+      <a class="nav-link" data-view="forecast">Previsión</a>
       <a class="nav-link" data-view="radar">Radar</a>
-      <a class="nav-link" data-view="locations">Locations</a>
+      <a class="nav-link" data-view="locations">Ciudades</a>
     </div>
 
     <!-- Settings -->
@@ -427,32 +428,32 @@
         <!-- Wind -->
         <div class="glass-panel p-5 text-center">
           <i data-lucide="wind" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
-          <p class="swiss-label mb-1">Wind</p>
-          <p class="text-xl font-semibold" id="dash-wind">12 mph</p>
+          <p class="swiss-label mb-1">Viento</p>
+          <p class="text-xl font-semibold" id="dash-wind">12 km/h</p>
         </div>
         <!-- Humidity -->
         <div class="glass-panel p-5 text-center">
           <i data-lucide="droplets" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
-          <p class="swiss-label mb-1">Humidity</p>
+          <p class="swiss-label mb-1">Humedad</p>
           <p class="text-xl font-semibold" id="dash-humidity">65%</p>
         </div>
         <!-- UV Index -->
         <div class="glass-panel p-5 text-center">
           <i data-lucide="sun" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
-          <p class="swiss-label mb-1">UV Index</p>
+          <p class="swiss-label mb-1">Índice UV</p>
           <p class="text-xl font-semibold" id="dash-uv">6</p>
         </div>
         <!-- Feels Like -->
         <div class="glass-panel p-5 text-center">
           <i data-lucide="thermometer" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
-          <p class="swiss-label mb-1">Feels Like</p>
-          <p class="text-xl font-semibold" id="dash-feels">70°F</p>
+          <p class="swiss-label mb-1">Sensación</p>
+          <p class="text-xl font-semibold" id="dash-feels">20°C</p>
         </div>
       </div>
 
       <!-- Today's Forecast -->
       <div class="mb-10 fade-in fade-d3">
-        <p class="swiss-label mb-4">Today's Forecast</p>
+        <p class="swiss-label mb-4">Previsión por Horas</p>
         <div class="hourly-scroll" id="dash-hourly">
           <!-- Populated by JS -->
         </div>
@@ -460,7 +461,7 @@
 
       <!-- Air Quality -->
       <div class="glass-panel p-6 fade-in fade-d4">
-        <p class="swiss-label mb-4">Air Quality</p>
+        <p class="swiss-label mb-4">Calidad del Aire</p>
         <div class="flex items-center justify-between mb-3">
           <span class="text-2xl font-bold" id="aqi-value">42</span>
           <span class="text-sm font-medium px-3 py-1 rounded-full bg-green-500/20 text-green-300" id="aqi-label">Good</span>
@@ -469,7 +470,7 @@
           <div class="aqi-dot" id="aqi-dot" style="left:14%"></div>
         </div>
         <div class="flex justify-between mt-2 text-[0.6rem] opacity-40">
-          <span>Good</span><span>Moderate</span><span>Unhealthy</span><span>Hazardous</span>
+          <span>Buena</span><span>Moderada</span><span>Mala</span><span>Peligrosa</span>
         </div>
       </div>
 
@@ -497,31 +498,31 @@
         <!-- Menu Items -->
         <div class="space-y-1" id="fc-sidebar-menu">
           <div class="sidebar-item active" data-fc-tab="hourly">
-            <i data-lucide="clock" class="w-4 h-4"></i> Hourly
+            <i data-lucide="clock" class="w-4 h-4"></i> Por horas
           </div>
           <div class="sidebar-item" data-fc-tab="daily">
-            <i data-lucide="calendar" class="w-4 h-4"></i> Daily
+            <i data-lucide="calendar" class="w-4 h-4"></i> Diario
           </div>
           <div class="sidebar-item" data-fc-tab="precipitation">
-            <i data-lucide="cloud-rain" class="w-4 h-4"></i> Precipitation
+            <i data-lucide="cloud-rain" class="w-4 h-4"></i> Precipitación
           </div>
           <div class="sidebar-item" data-fc-tab="wind">
-            <i data-lucide="wind" class="w-4 h-4"></i> Wind &amp; Pressure
+            <i data-lucide="wind" class="w-4 h-4"></i> Viento y Presión
           </div>
         </div>
 
         <!-- Sunrise / Sunset -->
         <div class="mt-8 space-y-3">
-          <p class="swiss-label">Sun</p>
+          <p class="swiss-label">Sol</p>
           <div class="flex items-center gap-3 text-sm opacity-70">
             <i data-lucide="sunrise" class="w-4 h-4"></i>
-            <span>Sunrise</span>
-            <span class="ml-auto font-medium" id="fc-sunrise">6:12 AM</span>
+            <span>Amanecer</span>
+            <span class="ml-auto font-medium" id="fc-sunrise">7:12</span>
           </div>
           <div class="flex items-center gap-3 text-sm opacity-70">
             <i data-lucide="sunset" class="w-4 h-4"></i>
-            <span>Sunset</span>
-            <span class="ml-auto font-medium" id="fc-sunset">8:34 PM</span>
+            <span>Atardecer</span>
+            <span class="ml-auto font-medium" id="fc-sunset">20:34</span>
           </div>
         </div>
       </aside>
@@ -531,7 +532,7 @@
 
         <!-- Hourly Forecast Chart -->
         <div class="mb-10">
-          <p class="swiss-label mb-5">Hourly Forecast</p>
+          <p class="swiss-label mb-5">Previsión por Horas</p>
           <div class="glass-panel p-5 overflow-hidden">
             <svg id="hourly-chart" class="w-full" height="160" viewBox="0 0 800 160" preserveAspectRatio="none">
               <defs>
@@ -547,7 +548,7 @@
 
         <!-- 10-Day Forecast List -->
         <div>
-          <p class="swiss-label mb-4">Next 10 Days</p>
+          <p class="swiss-label mb-4">Próximos 10 Días</p>
           <div class="glass-panel divide-y divide-white/5" id="fc-daily-list">
             <!-- Populated by JS -->
           </div>
@@ -585,11 +586,11 @@
 
       <!-- Legend -->
       <div class="absolute bottom-28 left-4 glass-panel p-4 z-10 text-xs space-y-2">
-        <p class="swiss-label mb-2">Precipitation</p>
-        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-400/60"></span> Light</div>
-        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-purple-400/70"></span> Moderate</div>
-        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-pink-500/80"></span> Heavy</div>
-        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-500/90"></span> Extreme</div>
+        <p class="swiss-label mb-2">Precipitación</p>
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-400/60"></span> Ligera</div>
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-purple-400/70"></span> Moderada</div>
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-pink-500/80"></span> Intensa</div>
+        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-red-500/90"></span> Extrema</div>
       </div>
 
       <!-- Bottom Time Controls -->
@@ -607,10 +608,10 @@
           </div>
           <!-- Layer Toggles -->
           <div class="flex gap-2 justify-center">
-            <button class="layer-btn active" data-layer="precipitation">Precipitation</button>
-            <button class="layer-btn" data-layer="temperature">Temperature</button>
-            <button class="layer-btn" data-layer="wind">Wind</button>
-            <button class="layer-btn" data-layer="clouds">Clouds</button>
+            <button class="layer-btn active" data-layer="precipitation">Precipitación</button>
+            <button class="layer-btn" data-layer="temperature">Temperatura</button>
+            <button class="layer-btn" data-layer="wind">Viento</button>
+            <button class="layer-btn" data-layer="clouds">Nubes</button>
           </div>
         </div>
       </div>
@@ -626,12 +627,12 @@
     <div class="max-w-5xl mx-auto px-6 pt-8 pb-16">
 
       <!-- Header -->
-      <h2 class="text-2xl font-bold mb-6">Saved Locations</h2>
+      <h2 class="text-2xl font-bold mb-6">Ciudades Guardadas</h2>
 
       <!-- Search Bar -->
       <div class="relative mb-5">
         <i data-lucide="search" class="w-5 h-5 absolute left-5 top-1/2 -translate-y-1/2 opacity-40"></i>
-        <input type="text" id="loc-search" class="search-input w-full py-4 pl-14 pr-5 text-base" placeholder="Search for a city..." />
+        <input type="text" id="loc-search" class="search-input w-full py-4 pl-14 pr-5 text-base" placeholder="Buscar ciudad..." />
       </div>
 
       <!-- Search Results -->
@@ -640,7 +641,7 @@
       <!-- Use Current Location -->
       <button class="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white/10 hover:bg-white/15 transition mb-8 text-sm font-medium" id="btn-current-loc">
         <i data-lucide="crosshair" class="w-4 h-4"></i>
-        Use Current Location
+        Usar mi ubicación actual
       </button>
 
       <!-- City Cards Grid -->
@@ -658,29 +659,75 @@
        ================================================================ -->
   <script>
   /* ============================================================
-     1. CONFIGURATION
+     1. CONFIGURACIÓN — Open-Meteo (sin API key, datos reales)
      ============================================================ */
-  const API_KEY  = 'YOUR_OPENWEATHERMAP_API_KEY';   // <-- Replace with your key
-  const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+  const UNITS    = 'metric';   // Siempre métrico para España
   const ICON_URL = 'https://openweathermap.org/img/wn';
 
-  const USE_DEMO  = (API_KEY === 'YOUR_OPENWEATHERMAP_API_KEY');
-  const UNITS     = 'imperial';                     // 'metric' for °C
+  /* ============================================================
+     2. CÓDIGOS WMO → descripción / icono / id de condición
+     ============================================================ */
+  function wmoDescription(code) {
+    const map = {
+      0: 'Cielo despejado', 1: 'Principalmente despejado',
+      2: 'Parcialmente nublado', 3: 'Nublado',
+      45: 'Niebla', 48: 'Niebla con escarcha',
+      51: 'Llovizna ligera', 53: 'Llovizna moderada', 55: 'Llovizna densa',
+      61: 'Lluvia ligera', 63: 'Lluvia moderada', 65: 'Lluvia intensa',
+      71: 'Nevada ligera', 73: 'Nevada moderada', 75: 'Nevada intensa',
+      77: 'Granizo fino',
+      80: 'Chubascos ligeros', 81: 'Chubascos moderados', 82: 'Chubascos fuertes',
+      85: 'Nieve en chubascos', 86: 'Nieve intensa en chubascos',
+      95: 'Tormenta', 96: 'Tormenta con granizo', 99: 'Tormenta fuerte con granizo',
+    };
+    return map[code] ?? 'Desconocido';
+  }
+
+  function wmoIcon(code, isDay) {
+    const s = isDay ? 'd' : 'n';
+    if (code === 0)                           return `01${s}`;
+    if (code === 1)                           return `02${s}`;
+    if (code === 2)                           return `03${s}`;
+    if (code === 3)                           return `04${s}`;
+    if (code === 45 || code === 48)           return `50${s}`;
+    if (code >= 51 && code <= 55)             return `09${s}`;
+    if (code >= 61 && code <= 65)             return `10${s}`;
+    if ((code >= 71 && code <= 77) || code === 85 || code === 86) return `13${s}`;
+    if (code >= 80 && code <= 82)             return `09${s}`;
+    if (code >= 95)                           return `11${s}`;
+    return `02${s}`;
+  }
+
+  function wmoId(code) {
+    if (code === 0 || code === 1) return 800;
+    if (code === 2)               return 802;
+    if (code === 3)               return 804;
+    if (code === 45 || code === 48) return 741;
+    if (code >= 51 && code <= 55) return 301;
+    if (code >= 61 && code <= 65) return 501;
+    if (code >= 71 && code <= 77) return 601;
+    if (code >= 80 && code <= 82) return 521;
+    if (code === 85 || code === 86) return 621;
+    if (code >= 95)               return 201;
+    return 800;
+  }
 
   /* ============================================================
-     2. APP STATE
+     3. ESTADO DE LA APP
      ============================================================ */
   let state = {
     currentView : 'dashboard',
-    currentCity : 'San Francisco',
+    currentCity : 'Valencia',
+    currentLat  : 39.4699,
+    currentLon  : -0.3763,
     currentData : null,
     forecastData: null,
     savedLocations: [
-      { name: 'San Francisco', country: 'US', lat: 37.77, lon: -122.42 },
-      { name: 'New York',      country: 'US', lat: 40.71, lon: -74.01  },
-      { name: 'Tokyo',         country: 'JP', lat: 35.68, lon: 139.69  },
-      { name: 'London',        country: 'GB', lat: 51.51, lon: -0.13   },
-      { name: 'Paris',         country: 'FR', lat: 48.86, lon: 2.35    },
+      { name: 'Valencia',  country: 'ES', lat: 39.4699, lon: -0.3763 },
+      { name: 'Madrid',    country: 'ES', lat: 40.4168, lon: -3.7038 },
+      { name: 'Barcelona', country: 'ES', lat: 41.3851, lon:  2.1734 },
+      { name: 'Sevilla',   country: 'ES', lat: 37.3886, lon: -5.9823 },
+      { name: 'Bilbao',    country: 'ES', lat: 43.2627, lon: -2.9253 },
     ],
     locationWeather: {},
     radarPlaying: false,
@@ -688,148 +735,147 @@
   };
 
   /* ============================================================
-     3. DEMO / FALLBACK DATA
+     4. API FUNCTIONS — Open-Meteo (gratuito, sin clave)
      ============================================================ */
-  function generateDemoData() {
-    const now = Math.floor(Date.now() / 1000);
-    const hourlyTemps = [72,73,74,73,71,69,66,64,62,61,60,59,58,57,57,56,55,55,56,58,61,64,67,70];
-    const hourlyIcons = ['02d','01d','01d','02d','02d','03d','02n','01n','01n','01n','01n','01n',
-                         '01n','01n','01n','01n','01n','01n','02d','02d','01d','01d','02d','02d'];
+
+  /** Normaliza la respuesta de Open-Meteo al mismo formato que usaban los renders */
+  function normalizeOpenMeteo(omData, cityName, country) {
+    const cur    = omData.current;
+    const daily  = omData.daily;
+    const hourly = omData.hourly;
+    const tzOff  = omData.utc_offset_seconds ?? 3600;
+    const isDay  = cur.is_day === 1;
+
+    const now     = Math.floor(Date.now() / 1000);
+    const sunrise = Math.floor(new Date(daily.sunrise[0]).getTime() / 1000);
+    const sunset  = Math.floor(new Date(daily.sunset[0]).getTime() / 1000);
+
+    // Lista horaria compatible con OWM forecast.list
+    const list = [];
+    for (let i = 0; i < hourly.time.length; i++) {
+      const dt = Math.floor(new Date(hourly.time[i]).getTime() / 1000);
+      if (dt < now - 1800) continue;
+      const h   = new Date(hourly.time[i]).getUTCHours();
+      const day = h >= 6 && h < 21;
+      const code = hourly.weather_code[i];
+      list.push({
+        dt,
+        main: {
+          temp    : hourly.temperature_2m[i],
+          temp_max: hourly.temperature_2m[i],
+          temp_min: hourly.temperature_2m[i],
+          humidity: hourly.relative_humidity_2m[i] ?? 60,
+          pressure: 1013,
+        },
+        weather: [{ id: wmoId(code), main: wmoDescription(code), description: wmoDescription(code), icon: wmoIcon(code, day) }],
+        wind: { speed: hourly.wind_speed_10m?.[i] ?? 0, deg: hourly.wind_direction_10m?.[i] ?? 0 },
+        pop : (hourly.precipitation_probability?.[i] ?? 0) / 100,
+      });
+      if (list.length >= 240) break; // ~10 días
+    }
 
     const current = {
-      name: 'San Francisco',
-      sys: { country: 'US', sunrise: now - 30000, sunset: now + 25000 },
-      main: { temp: 72, feels_like: 70, humidity: 65, temp_min: 62, temp_max: 75, pressure: 1015 },
-      wind: { speed: 12, deg: 230 },
-      weather: [{ id: 802, main: 'Clouds', description: 'partly cloudy', icon: '02d' }],
-      visibility: 16093,
-      dt: now,
-      timezone: -25200,
+      name: cityName,
+      sys : { country, sunrise, sunset },
+      main: {
+        temp      : cur.temperature_2m,
+        feels_like: cur.apparent_temperature,
+        humidity  : cur.relative_humidity_2m,
+        temp_min  : daily.temperature_2m_min[0],
+        temp_max  : daily.temperature_2m_max[0],
+        pressure  : cur.surface_pressure ?? 1013,
+      },
+      wind   : { speed: cur.wind_speed_10m, deg: cur.wind_direction_10m ?? 0 },
+      weather: [{ id: wmoId(cur.weather_code), main: wmoDescription(cur.weather_code), description: wmoDescription(cur.weather_code), icon: wmoIcon(cur.weather_code, isDay) }],
+      visibility: 10000,
+      dt  : now,
+      timezone: tzOff,
     };
 
-    const forecastList = [];
-    for (let i = 0; i < 40; i++) {
-      const dt = now + i * 10800;
-      const hi = Math.round(60 + Math.random() * 20);
-      const lo = hi - Math.round(5 + Math.random() * 8);
-      const icons = ['01d','02d','03d','04d','09d','10d','01n','02n'];
-      const descs = ['clear sky','few clouds','scattered clouds','broken clouds','shower rain','rain','clear sky','few clouds'];
-      const idx   = Math.floor(Math.random() * icons.length);
-      forecastList.push({
-        dt,
-        main: { temp: hi, temp_min: lo, temp_max: hi, humidity: 40 + Math.round(Math.random()*40), pressure: 1010 + Math.round(Math.random()*10) },
-        weather: [{ id: 800 + idx, main: descs[idx], description: descs[idx], icon: icons[idx] }],
-        wind: { speed: 5 + Math.round(Math.random()*15), deg: Math.round(Math.random()*360) },
-        pop: parseFloat((Math.random() * 0.8).toFixed(2)),
-      });
-    }
-
-    return {
-      current,
-      forecast: { list: forecastList, city: { name: 'San Francisco', country: 'US', timezone: -25200, sunrise: now - 30000, sunset: now + 25000 } },
-      hourlyTemps,
-      hourlyIcons,
+    const forecast = {
+      list,
+      city: { name: cityName, country, timezone: tzOff, sunrise, sunset },
     };
+
+    return { current, forecast };
   }
 
-  function generateCityDemo(name, country) {
-    const bases = {
-      'San Francisco': { temp: 72, icon: '02d', desc: 'Partly Cloudy', hi: 75, lo: 62 },
-      'New York':      { temp: 85, icon: '01d', desc: 'Clear Sky',     hi: 88, lo: 74 },
-      'Tokyo':         { temp: 82, icon: '10d', desc: 'Light Rain',    hi: 84, lo: 76 },
-      'London':        { temp: 59, icon: '04d', desc: 'Overcast',      hi: 62, lo: 54 },
-      'Paris':         { temp: 64, icon: '01d', desc: 'Clear Sky',     hi: 68, lo: 57 },
-      'Sydney':        { temp: 68, icon: '02d', desc: 'Few Clouds',    hi: 71, lo: 61 },
-    };
-    const d = bases[name] || { temp: 70, icon: '02d', desc: 'Fair', hi: 73, lo: 64 };
-    return {
-      name, country,
-      main: { temp: d.temp, temp_max: d.hi, temp_min: d.lo, humidity: 55 + Math.round(Math.random()*20) },
-      weather: [{ icon: d.icon, description: d.desc }],
-      wind: { speed: 8 + Math.round(Math.random()*10) },
-    };
+  async function fetchByCoords(lat, lon, cityName, country) {
+    const p = new URLSearchParams({
+      latitude : lat,
+      longitude: lon,
+      current  : 'temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m,is_day,surface_pressure',
+      hourly   : 'temperature_2m,weather_code,precipitation_probability,relative_humidity_2m,wind_speed_10m,wind_direction_10m',
+      daily    : 'weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_probability_max',
+      timezone : 'auto',
+      wind_speed_unit: 'kmh',
+      forecast_days: 10,
+    });
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?${p}`);
+    if (!res.ok) throw new Error('Open-Meteo fetch failed');
+    return normalizeOpenMeteo(await res.json(), cityName, country);
   }
 
-  /* ============================================================
-     4. API FUNCTIONS
-     ============================================================ */
-  async function fetchCurrentWeather(city) {
-    if (USE_DEMO) return generateDemoData().current;
-    const res = await fetch(`${BASE_URL}/weather?q=${encodeURIComponent(city)}&units=${UNITS}&appid=${API_KEY}`);
-    if (!res.ok) throw new Error('Weather fetch failed');
-    return res.json();
-  }
-
-  async function fetchForecast(city) {
-    if (USE_DEMO) return generateDemoData().forecast;
-    const res = await fetch(`${BASE_URL}/forecast?q=${encodeURIComponent(city)}&units=${UNITS}&appid=${API_KEY}`);
-    if (!res.ok) throw new Error('Forecast fetch failed');
-    return res.json();
-  }
-
-  async function fetchWeatherByCoords(lat, lon) {
-    if (USE_DEMO) return generateDemoData().current;
-    const res = await fetch(`${BASE_URL}/weather?lat=${lat}&lon=${lon}&units=${UNITS}&appid=${API_KEY}`);
-    if (!res.ok) throw new Error('Coord weather fetch failed');
-    return res.json();
-  }
-
-  async function searchCities(query) {
-    if (USE_DEMO) {
-      const all = ['San Francisco','New York','Tokyo','London','Paris','Sydney','Toronto','Berlin','Rome','Madrid','Seoul','Mumbai','Dubai','Bangkok','Moscow'];
-      return all.filter(c => c.toLowerCase().includes(query.toLowerCase())).map(c => ({ name: c, country: '--' }));
-    }
-    const res = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(query)}&limit=5&appid=${API_KEY}`);
+  async function geocodeCity(query) {
+    const p = new URLSearchParams({ name: query, count: 8, language: 'es', format: 'json' });
+    const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?${p}`);
     if (!res.ok) return [];
     const data = await res.json();
-    return data.map(d => ({ name: d.name, country: d.country, lat: d.lat, lon: d.lon }));
+    return (data.results ?? []).map(r => ({
+      name   : r.name,
+      country: r.country_code,
+      admin1 : r.admin1 ?? '',
+      lat    : r.latitude,
+      lon    : r.longitude,
+    }));
+  }
+
+  async function fetchAirQuality(lat, lon) {
+    try {
+      const p = new URLSearchParams({ latitude: lat, longitude: lon, current: 'us_aqi,pm2_5', timezone: 'auto' });
+      const res = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?${p}`);
+      if (!res.ok) return null;
+      return (await res.json()).current ?? null;
+    } catch { return null; }
   }
 
   /* ============================================================
-     5. UTILITY FUNCTIONS
+     5. UTILIDADES
      ============================================================ */
-  function formatTemp(t) { return `${Math.round(t)}°`; }
-  function formatTempUnit(t) { return `${Math.round(t)}°${UNITS === 'imperial' ? 'F' : 'C'}`; }
+  function formatTemp(t)     { return `${Math.round(t)}°`; }
+  function formatTempUnit(t) { return `${Math.round(t)}°C`; }
 
   function formatDate(ts, tz) {
-    const d = new Date((ts + tz) * 1000);
-    const utc = new Date(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(),
-                         d.getUTCHours(), d.getUTCMinutes());
-    const days  = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const mons  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const h = utc.getHours(); const m = utc.getMinutes();
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const h12  = h % 12 || 12;
-    return `${days[utc.getDay()]}, ${mons[utc.getMonth()]} ${utc.getDate()} · ${h12}:${String(m).padStart(2,'0')} ${ampm}`;
+    const utc  = new Date((ts + tz) * 1000);
+    const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+    const mons = ['enero','febrero','marzo','abril','mayo','junio',
+                  'julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    const h = utc.getUTCHours(), m = utc.getUTCMinutes();
+    return `${days[utc.getUTCDay()]}, ${utc.getUTCDate()} de ${mons[utc.getUTCMonth()]} · ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
   }
 
   function formatHour(ts, tz) {
     const d = new Date((ts + tz) * 1000);
-    const h = d.getUTCHours();
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    return `${h % 12 || 12} ${ampm}`;
+    return `${String(d.getUTCHours()).padStart(2,'0')}h`;
   }
 
-  function formatTime12(ts, tz) {
+  function formatTime24(ts, tz) {
     const d = new Date((ts + tz) * 1000);
-    const h = d.getUTCHours(); const m = d.getUTCMinutes();
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    return `${h % 12 || 12}:${String(m).padStart(2,'0')} ${ampm}`;
+    return `${String(d.getUTCHours()).padStart(2,'0')}:${String(d.getUTCMinutes()).padStart(2,'0')}`;
   }
 
   function getDayName(ts, tz, short) {
     const d = new Date((ts + tz) * 1000);
     const names = short
-      ? ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      ? ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb']
+      : ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
     return names[d.getUTCDay()];
   }
 
   function iconUrl(code) { return `${ICON_URL}/${code}@2x.png`; }
 
-  function capitalize(s) { return s.split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' '); }
+  function capitalize(s) { return s ? s[0].toUpperCase() + s.slice(1) : s; }
 
-  /** Choose background class based on weather condition id + icon (d/n) */
   function weatherBg(weatherId, icon) {
     const isNight = icon && icon.endsWith('n');
     if (isNight) return 'weather-night';
@@ -838,7 +884,7 @@
     if (weatherId >= 600 && weatherId < 700) return 'weather-snow';
     if (weatherId >= 700 && weatherId < 800) return 'weather-cloudy';
     if (weatherId === 800) return 'weather-sunny';
-    if (weatherId > 800) return 'weather-cloudy';
+    if (weatherId > 800)   return 'weather-cloudy';
     return 'weather-sunny';
   }
 
@@ -887,50 +933,49 @@
   /* ============================================================
      7. RENDER — DASHBOARD
      ============================================================ */
-  function renderDashboard(data, forecast) {
+  function renderDashboard(data, forecast, aqiData) {
     if (!data) return;
     const w  = data.weather[0];
-    const tz = data.timezone || 0;
+    const tz = data.timezone ?? 0;
 
-    document.getElementById('dash-city').textContent      = `${data.name}, ${data.sys.country}`;
-    document.getElementById('dash-date').textContent      = formatDate(data.dt, tz);
-    document.getElementById('dash-temp').innerHTML        = `${Math.round(data.main.temp)}°<span class="text-5xl font-light">${UNITS==='imperial'?'F':'C'}</span>`;
-    document.getElementById('dash-condition').textContent  = capitalize(w.description);
-    document.getElementById('dash-icon').src              = iconUrl(w.icon);
-    document.getElementById('dash-wind').textContent      = `${Math.round(data.wind.speed)} ${UNITS==='imperial'?'mph':'m/s'}`;
-    document.getElementById('dash-humidity').textContent   = `${data.main.humidity}%`;
-    document.getElementById('dash-feels').textContent     = formatTempUnit(data.main.feels_like);
+    document.getElementById('dash-city').textContent     = `${data.name}, ${data.sys.country}`;
+    document.getElementById('dash-date').textContent     = formatDate(data.dt, tz);
+    document.getElementById('dash-temp').innerHTML       = `${Math.round(data.main.temp)}°<span class="text-5xl font-light">C</span>`;
+    document.getElementById('dash-condition').textContent = capitalize(w.description);
+    document.getElementById('dash-icon').src             = iconUrl(w.icon);
+    document.getElementById('dash-wind').textContent     = `${Math.round(data.wind.speed)} km/h`;
+    document.getElementById('dash-humidity').textContent  = `${data.main.humidity}%`;
+    document.getElementById('dash-feels').textContent    = formatTempUnit(data.main.feels_like);
 
-    // UV — estimate from condition (real UV needs One-Call API)
-    const uvEstimate = w.id === 800 ? 7 : w.id > 800 && w.id < 804 ? 5 : 3;
-    document.getElementById('dash-uv').textContent = USE_DEMO ? '6' : uvEstimate;
+    // UV — estimación según condición (requeriría API UV dedicada)
+    const uvEst = w.id === 800 ? 7 : w.id > 800 && w.id < 804 ? 4 : 2;
+    document.getElementById('dash-uv').textContent = uvEst;
 
-    // AQI — demo
-    const aqiVal = USE_DEMO ? 42 : (30 + Math.round(Math.random()*60));
+    // AQI — datos reales si disponibles, estimación si no
+    const aqiVal = aqiData?.us_aqi ?? Math.round(20 + Math.random() * 60);
     const aqiPct = Math.min(100, (aqiVal / 300) * 100);
-    let aqiText = 'Good';
-    if (aqiVal > 50)  aqiText = 'Moderate';
-    if (aqiVal > 100) aqiText = 'Unhealthy';
-    if (aqiVal > 200) aqiText = 'Very Unhealthy';
-    const aqiColors = { Good:'green', Moderate:'yellow', Unhealthy:'red', 'Very Unhealthy':'red' };
+    let aqiText  = 'Buena';
+    let aqiColor = 'green';
+    if (aqiVal > 50)  { aqiText = 'Moderada';  aqiColor = 'yellow'; }
+    if (aqiVal > 100) { aqiText = 'Mala';       aqiColor = 'orange'; }
+    if (aqiVal > 200) { aqiText = 'Peligrosa';  aqiColor = 'red';    }
     document.getElementById('aqi-value').textContent = aqiVal;
     document.getElementById('aqi-label').textContent = aqiText;
     document.getElementById('aqi-dot').style.left    = aqiPct + '%';
 
-    // Background
     setBackground(weatherBg(w.id, w.icon));
 
-    // Hourly from forecast
+    // Previsión por horas
     const hourlyContainer = document.getElementById('dash-hourly');
     hourlyContainer.innerHTML = '';
-    if (forecast && forecast.list) {
+    if (forecast?.list) {
       const items = forecast.list.slice(0, 8);
-      const fcTz  = forecast.city ? forecast.city.timezone : tz;
+      const fcTz  = forecast.city?.timezone ?? tz;
       items.forEach((item, i) => {
         const card = document.createElement('div');
         card.className = 'glass-panel flex-shrink-0 w-[80px] py-4 px-2 text-center';
         card.innerHTML = `
-          <p class="text-xs opacity-50 mb-2">${i === 0 ? 'Now' : formatHour(item.dt, fcTz)}</p>
+          <p class="text-xs opacity-50 mb-2">${i === 0 ? 'Ahora' : formatHour(item.dt, fcTz)}</p>
           <img src="${iconUrl(item.weather[0].icon)}" class="w-8 h-8 mx-auto mb-1" alt="" />
           <p class="text-sm font-semibold">${formatTemp(item.main.temp)}</p>
         `;
@@ -954,11 +999,11 @@
     document.getElementById('fc-sidebar-icon').src         = iconUrl(w.icon);
     document.getElementById('fc-sidebar-city').textContent = `${data.name}, ${data.sys.country}`;
 
-    // Sunrise / Sunset
-    const sr = data.sys.sunrise || (forecast.city ? forecast.city.sunrise : 0);
-    const ss = data.sys.sunset  || (forecast.city ? forecast.city.sunset  : 0);
-    document.getElementById('fc-sunrise').textContent = formatTime12(sr, tz);
-    document.getElementById('fc-sunset').textContent  = formatTime12(ss, tz);
+    // Amanecer / Atardecer
+    const sr = data.sys.sunrise || forecast.city?.sunrise || 0;
+    const ss = data.sys.sunset  || forecast.city?.sunset  || 0;
+    document.getElementById('fc-sunrise').textContent = formatTime24(sr, tz);
+    document.getElementById('fc-sunset').textContent  = formatTime24(ss, tz);
 
     // Hourly chart (simple SVG line)
     const chartSvg    = document.getElementById('hourly-chart');
@@ -1014,7 +1059,7 @@
 
     // Time labels
     chartLabels.innerHTML = items.map((item, i) =>
-      `<span>${i === 0 ? 'Now' : formatHour(item.dt, tz)}</span>`
+      `<span>${i === 0 ? 'Ahora' : formatHour(item.dt, tz)}</span>`
     ).join('');
 
     // 10-Day list (using 5-day data, grouped by day, extended with demo if needed)
@@ -1057,7 +1102,7 @@
       const pop = Math.round(Math.max(...day.pops) * 100);
       // Pick the most common daytime icon
       const dayIcon = day.icons.find(ic => ic.endsWith('d')) || day.icons[0];
-      const dayName = idx === 0 ? 'Today' : idx === 1 ? 'Tomorrow' : getDayName(day.dt, tz, true);
+      const dayName = idx === 0 ? 'Hoy' : idx === 1 ? 'Mañana' : getDayName(day.dt, tz, true);
 
       const barLeft  = ((lo - globalMin) / globalRange) * 100;
       const barWidth = ((hi - lo) / globalRange) * 100;
@@ -1090,20 +1135,20 @@
     const markersEl = document.getElementById('radar-markers');
     markersEl.innerHTML = '';
 
+    // Ciudades españolas — posicionadas sobre la Península Ibérica
     const cities = [
-      { name: 'San Francisco', x: '25%', y: '40%' },
-      { name: 'Sacramento',    x: '30%', y: '30%' },
-      { name: 'San Jose',      x: '27%', y: '52%' },
-      { name: 'Oakland',       x: '28%', y: '42%' },
-      { name: 'Fresno',        x: '35%', y: '55%' },
-      { name: 'Los Angeles',   x: '30%', y: '72%' },
-      { name: 'Reno',          x: '38%', y: '22%' },
-      { name: 'Portland',      x: '22%', y: '12%' },
-      { name: 'Seattle',       x: '20%', y: '5%'  },
-      { name: 'Phoenix',       x: '48%', y: '75%' },
-      { name: 'Las Vegas',     x: '45%', y: '62%' },
-      { name: 'Salt Lake City',x: '52%', y: '30%' },
-      { name: 'Denver',        x: '60%', y: '38%' },
+      { name: 'Valencia',   x: '65%', y: '52%' },
+      { name: 'Madrid',     x: '42%', y: '42%' },
+      { name: 'Barcelona',  x: '72%', y: '28%' },
+      { name: 'Sevilla',    x: '28%', y: '72%' },
+      { name: 'Bilbao',     x: '48%', y: '18%' },
+      { name: 'Zaragoza',   x: '58%', y: '32%' },
+      { name: 'Málaga',     x: '36%', y: '84%' },
+      { name: 'Alicante',   x: '62%', y: '65%' },
+      { name: 'Murcia',     x: '60%', y: '72%' },
+      { name: 'Valladolid', x: '38%', y: '30%' },
+      { name: 'A Coruña',   x: '18%', y: '15%' },
+      { name: 'Palma',      x: '80%', y: '62%' },
     ];
 
     cities.forEach(c => {
@@ -1181,27 +1226,25 @@
     const grid = document.getElementById('loc-grid');
     grid.innerHTML = '<div class="col-span-full flex justify-center py-12"><div class="loading-spinner"></div></div>';
 
-    // Fetch weather for each saved location
-    const weatherPromises = state.savedLocations.map(async loc => {
-      if (USE_DEMO) return generateCityDemo(loc.name, loc.country);
-      try {
-        return await fetchCurrentWeather(loc.name);
-      } catch {
-        return generateCityDemo(loc.name, loc.country);
-      }
-    });
-
-    const results = await Promise.all(weatherPromises);
+    const results = await Promise.all(
+      state.savedLocations.map(async loc => {
+        try {
+          const { current } = await fetchByCoords(loc.lat, loc.lon, loc.name, loc.country);
+          return { w: current, loc };
+        } catch { return { w: null, loc }; }
+      })
+    );
     grid.innerHTML = '';
 
-    results.forEach((w, i) => {
+    results.forEach(({ w, loc }) => {
+      if (!w) return;
       const card = document.createElement('div');
       card.className = 'location-card';
       card.innerHTML = `
         <div class="flex items-start justify-between mb-4">
           <div>
             <h3 class="text-lg font-semibold">${w.name}</h3>
-            <p class="text-xs opacity-50">${state.savedLocations[i].country}</p>
+            <p class="text-xs opacity-50">${loc.country}</p>
           </div>
           <img src="${iconUrl(w.weather[0].icon)}" class="w-12 h-12 -mt-1 -mr-1" alt="" />
         </div>
@@ -1210,27 +1253,27 @@
         <div class="flex items-center gap-4 mt-4 text-xs opacity-40">
           <span class="flex items-center gap-1"><i data-lucide="arrow-up" class="w-3 h-3"></i>${Math.round(w.main.temp_max)}°</span>
           <span class="flex items-center gap-1"><i data-lucide="arrow-down" class="w-3 h-3"></i>${Math.round(w.main.temp_min)}°</span>
-          <span class="flex items-center gap-1"><i data-lucide="wind" class="w-3 h-3"></i>${Math.round(w.wind.speed)} ${UNITS==='imperial'?'mph':'m/s'}</span>
+          <span class="flex items-center gap-1"><i data-lucide="wind" class="w-3 h-3"></i>${Math.round(w.wind.speed)} km/h</span>
         </div>
       `;
       card.addEventListener('click', () => {
-        state.currentCity = w.name;
-        loadWeather(w.name);
+        state.currentCity = loc.name;
+        state.currentLat  = loc.lat;
+        state.currentLon  = loc.lon;
+        loadWeather(loc.lat, loc.lon, loc.name, loc.country);
         navigateTo('dashboard');
       });
       grid.appendChild(card);
     });
 
-    // Add Location card
+    // Añadir ciudad
     const addCard = document.createElement('div');
     addCard.className = 'add-location-card';
     addCard.innerHTML = `
       <i data-lucide="plus" class="w-8 h-8 opacity-30 mb-2"></i>
-      <span class="text-sm opacity-40">Add Location</span>
+      <span class="text-sm opacity-40">Añadir ciudad</span>
     `;
-    addCard.addEventListener('click', () => {
-      document.getElementById('loc-search').focus();
-    });
+    addCard.addEventListener('click', () => document.getElementById('loc-search').focus());
     grid.appendChild(addCard);
 
     refreshIcons();
@@ -1250,24 +1293,23 @@
       const q = input.value.trim();
       if (q.length < 2) { results.classList.add('hidden'); return; }
       searchTimeout = setTimeout(async () => {
-        const cities = await searchCities(q);
+        const cities = await geocodeCity(q);
         if (!cities.length) { results.classList.add('hidden'); return; }
         results.classList.remove('hidden');
-        results.innerHTML = cities.map(c => `
-          <div class="px-5 py-3 hover:bg-white/10 cursor-pointer transition text-sm flex items-center gap-3" data-city="${c.name}" data-country="${c.country || ''}">
+        results.innerHTML = cities.map((c, idx) => `
+          <div class="px-5 py-3 hover:bg-white/10 cursor-pointer transition text-sm flex items-center gap-3" data-idx="${idx}">
             <i data-lucide="map-pin" class="w-4 h-4 opacity-40"></i>
             <span>${c.name}</span>
-            <span class="opacity-40 text-xs">${c.country || ''}</span>
+            <span class="opacity-40 text-xs">${c.admin1 ? c.admin1 + ', ' : ''}${c.country || ''}</span>
           </div>
         `).join('');
         refreshIcons();
 
-        results.querySelectorAll('[data-city]').forEach(el => {
+        results.querySelectorAll('[data-idx]').forEach(el => {
           el.addEventListener('click', () => {
-            const city = el.dataset.city;
-            const country = el.dataset.country;
-            if (!state.savedLocations.find(l => l.name === city)) {
-              state.savedLocations.push({ name: city, country });
+            const c = cities[parseInt(el.dataset.idx)];
+            if (!state.savedLocations.find(l => l.name === c.name)) {
+              state.savedLocations.push({ name: c.name, country: c.country, lat: c.lat, lon: c.lon });
             }
             results.classList.add('hidden');
             input.value = '';
@@ -1277,49 +1319,48 @@
       }, 350);
     });
 
-    // Current location
+    // Ubicación actual
     document.getElementById('btn-current-loc').addEventListener('click', () => {
-      if (!navigator.geolocation) return alert('Geolocation not supported');
+      if (!navigator.geolocation) return alert('Geolocalización no disponible');
       navigator.geolocation.getCurrentPosition(async pos => {
         try {
-          const data = await fetchWeatherByCoords(pos.coords.latitude, pos.coords.longitude);
-          state.currentCity = data.name;
-          if (!state.savedLocations.find(l => l.name === data.name)) {
-            state.savedLocations.unshift({ name: data.name, country: data.sys.country, lat: pos.coords.latitude, lon: pos.coords.longitude });
+          const lat = pos.coords.latitude, lon = pos.coords.longitude;
+          // Geocodificación inversa aproximada: buscar ciudad más cercana
+          const hits = await geocodeCity(`${lat.toFixed(2)},${lon.toFixed(2)}`);
+          const cityName = hits[0]?.name ?? 'Mi ubicación';
+          const country  = hits[0]?.country ?? 'ES';
+          if (!state.savedLocations.find(l => l.lat === lat && l.lon === lon)) {
+            state.savedLocations.unshift({ name: cityName, country, lat, lon });
           }
-          loadWeather(data.name);
+          state.currentLat  = lat;
+          state.currentLon  = lon;
+          state.currentCity = cityName;
+          loadWeather(lat, lon, cityName, country);
           navigateTo('dashboard');
-        } catch (e) {
-          console.error(e);
-        }
-      }, () => alert('Location access denied'));
+        } catch (e) { console.error(e); }
+      }, () => alert('Acceso a ubicación denegado'));
     });
   }
 
   /* ============================================================
-     12. LOAD WEATHER DATA
+     12. CARGA DE DATOS METEOROLÓGICOS
      ============================================================ */
-  async function loadWeather(city) {
+  async function loadWeather(lat, lon, cityName, country) {
     const overlay = document.getElementById('loading-overlay');
     overlay.classList.remove('hidden');
 
     try {
-      const [current, forecast] = await Promise.all([
-        fetchCurrentWeather(city),
-        fetchForecast(city),
+      // Peticiones en paralelo: tiempo + calidad del aire
+      const [{ current, forecast }, aqiData] = await Promise.all([
+        fetchByCoords(lat, lon, cityName, country),
+        fetchAirQuality(lat, lon),
       ]);
       state.currentData  = current;
       state.forecastData = forecast;
-      renderDashboard(current, forecast);
+      renderDashboard(current, forecast, aqiData);
       renderForecast(current, forecast);
     } catch (err) {
-      console.error('Failed to load weather:', err);
-      // Use demo data as fallback
-      const demo = generateDemoData();
-      state.currentData  = demo.current;
-      state.forecastData = demo.forecast;
-      renderDashboard(demo.current, demo.forecast);
-      renderForecast(demo.current, demo.forecast);
+      console.error('Error cargando el tiempo:', err);
     } finally {
       overlay.classList.add('hidden');
     }
@@ -1340,13 +1381,11 @@
   }
 
   /* ============================================================
-     14. SETTINGS TOGGLE (unit switch — simple modal)
+     14. AJUSTES
      ============================================================ */
   function initSettings() {
     document.getElementById('btn-settings').addEventListener('click', () => {
-      const current = UNITS === 'imperial' ? '°F' : '°C';
-      const msg = `Currently showing temperatures in ${current}.\n\nTo switch units, change the UNITS constant in the code to 'metric' or 'imperial'.`;
-      alert(msg);
+      alert('Tiempo Valencia · Neo-Glass Weather\n\nDatos en tiempo real proporcionados por Open-Meteo (open-meteo.com).\nAPI pública y gratuita · Sin clave de acceso necesaria.\n\nUnidades: °C · km/h · hPa');
     });
   }
 
@@ -1375,10 +1414,10 @@
     initForecastSidebar();
     initSettings();
 
-    // Load initial weather
-    loadWeather(state.currentCity);
+    // Cargar tiempo inicial — Valencia, España
+    loadWeather(state.currentLat, state.currentLon, state.currentCity, 'ES');
 
-    // Show dashboard
+    // Mostrar dashboard
     navigateTo('dashboard');
   });
   </script>

@@ -17,6 +17,10 @@
   <!-- Lucide Icons CDN -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- Leaflet CSS & JS — Dark minimalist radar map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <!-- Tailwind Custom Config -->
   <script>
     tailwind.config = {
@@ -46,25 +50,69 @@
     }
 
     /* ================================================
-       WEATHER BACKGROUND GRADIENTS
+       WEATHER BACKGROUND GRADIENTS — Immersive animated
        ================================================ */
+    @keyframes atmosphericDrift {
+      0%   { background-position: 0% 0%; }
+      25%  { background-position: 50% 100%; }
+      50%  { background-position: 100% 50%; }
+      75%  { background-position: 50% 0%; }
+      100% { background-position: 0% 0%; }
+    }
+
     .weather-sunny {
-      background: linear-gradient(135deg, #f59e0b 0%, #f97316 25%, #ef4444 50%, #ec4899 75%, #a855f7 100%);
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(180, 120, 60, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(160, 90, 50, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(100, 70, 80, 0.25) 0%, transparent 50%),
+        linear-gradient(135deg, #3d2b1f 0%, #4a3728 30%, #2d2235 60%, #1a1a2e 100%);
+      background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+      animation: atmosphericDrift 30s ease-in-out infinite;
     }
     .weather-cloudy {
-      background: linear-gradient(135deg, #64748b 0%, #475569 40%, #6366f1 100%);
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(80, 90, 110, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 70%, rgba(60, 70, 100, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 20%, rgba(90, 80, 100, 0.3) 0%, transparent 50%),
+        linear-gradient(135deg, #1e2530 0%, #252d3a 40%, #1a1f35 100%);
+      background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+      animation: atmosphericDrift 35s ease-in-out infinite;
     }
     .weather-rain {
-      background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 40%, #4338ca 100%);
+      background:
+        radial-gradient(ellipse at 25% 60%, rgba(40, 60, 100, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 30%, rgba(30, 45, 80, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(50, 50, 90, 0.3) 0%, transparent 50%),
+        linear-gradient(135deg, #0e1520 0%, #141e2e 40%, #121530 100%);
+      background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+      animation: atmosphericDrift 25s ease-in-out infinite;
     }
     .weather-night {
-      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+      background:
+        radial-gradient(ellipse at 20% 30%, rgba(25, 30, 60, 0.6) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(30, 20, 55, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(20, 25, 50, 0.4) 0%, transparent 50%),
+        linear-gradient(135deg, #080b14 0%, #0d1025 50%, #111028 100%);
+      background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+      animation: atmosphericDrift 40s ease-in-out infinite;
     }
     .weather-snow {
-      background: linear-gradient(135deg, #cbd5e1 0%, #64748b 50%, #6366f1 100%);
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(130, 140, 160, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 30%, rgba(100, 110, 140, 0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 70%, rgba(120, 120, 150, 0.25) 0%, transparent 50%),
+        linear-gradient(135deg, #2a2e38 0%, #353a48 50%, #252a3a 100%);
+      background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+      animation: atmosphericDrift 32s ease-in-out infinite;
     }
     .weather-storm {
-      background: linear-gradient(135deg, #0c0a20 0%, #1a1a2e 50%, #4a1942 100%);
+      background:
+        radial-gradient(ellipse at 20% 40%, rgba(40, 20, 50, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 60%, rgba(20, 15, 40, 0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 30%, rgba(50, 30, 60, 0.35) 0%, transparent 50%),
+        linear-gradient(135deg, #080510 0%, #0f0a18 50%, #0c0814 100%);
+      background-size: 200% 200%, 200% 200%, 200% 200%, 100% 100%;
+      animation: atmosphericDrift 20s ease-in-out infinite;
     }
 
     /* ================================================
@@ -96,10 +144,10 @@
        ================================================ */
     .swiss-label {
       font-size: 0.65rem;
-      font-weight: 600;
+      font-weight: 400;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.45);
     }
 
     /* ================================================
@@ -154,19 +202,19 @@
        ================================================ */
     .forecast-day {
       display: flex; align-items: center;
-      padding: 14px 18px; border-radius: 12px;
+      padding: 20px 20px; border-radius: 12px;
       transition: background 0.2s ease;
     }
-    .forecast-day:hover { background: rgba(255,255,255,0.06); }
+    .forecast-day:hover { background: rgba(255,255,255,0.04); }
 
     .temp-bar-track {
       width: 110px; height: 5px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 3px; position: relative; overflow: hidden;
+      background: rgba(255,255,255,0.08);
+      border-radius: 9999px; position: relative; overflow: hidden;
     }
     .temp-bar-fill {
-      height: 100%; border-radius: 3px;
-      background: linear-gradient(90deg, #60a5fa, #f97316);
+      height: 100%; border-radius: 9999px;
+      background: linear-gradient(90deg, #7ba6d4, #c49a78);
       position: absolute;
     }
 
@@ -212,6 +260,26 @@
       position: absolute; font-size: 0.65rem;
       color: rgba(255,255,255,0.55); white-space: nowrap;
     }
+
+    /* Leaflet map overrides for dark minimalist look */
+    #leaflet-radar-map {
+      position: absolute; inset: 0; z-index: 1;
+      background: #0a0a14;
+    }
+    .leaflet-control-attribution { display: none !important; }
+    .leaflet-control-zoom { display: none !important; }
+    .radar-leaflet-tooltip {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: rgba(255,255,255,0.5) !important;
+      font-size: 0.65rem !important;
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 400 !important;
+      padding: 0 !important;
+      white-space: nowrap !important;
+    }
+    .radar-leaflet-tooltip::before { display: none !important; }
 
     /* ================================================
        LOCATION CARDS
@@ -344,16 +412,16 @@
     .fade-d3 { animation-delay: .3s; opacity: 0; }
     .fade-d4 { animation-delay: .4s; opacity: 0; }
 
-    /* SVG chart */
+    /* SVG chart — Minimalist Area Chart */
     .chart-line {
-      fill: none; stroke: rgba(255,255,255,0.8); stroke-width: 2;
+      fill: none; stroke: rgba(255,255,255,0.7); stroke-width: 2.5;
       stroke-linecap: round; stroke-linejoin: round;
     }
     .chart-area {
-      fill: url(#chartGrad); opacity: 0.3;
+      fill: url(#chartGrad); opacity: 1;
     }
     .chart-dot {
-      fill: #fff; stroke: rgba(255,255,255,0.4); stroke-width: 2;
+      fill: #fff; stroke: rgba(255,255,255,0.3); stroke-width: 2;
     }
   </style>
 </head>
@@ -370,7 +438,7 @@
     <!-- Logo -->
     <div class="flex items-center gap-2">
       <i data-lucide="sun" class="w-5 h-5 text-yellow-300"></i>
-      <span class="text-base font-bold tracking-wide">Neo-Glass</span>
+      <span class="text-base font-normal tracking-wide opacity-90">Neo-Glass</span>
     </div>
 
     <!-- Nav Tabs -->
@@ -407,47 +475,47 @@
       <div class="text-center mb-2 fade-in">
         <div class="flex items-center justify-center gap-2 mb-1">
           <i data-lucide="map-pin" class="w-4 h-4 opacity-70"></i>
-          <span id="dash-city" class="text-lg font-semibold">San Francisco, CA</span>
+          <span id="dash-city" class="text-lg font-normal opacity-90">San Francisco, CA</span>
         </div>
         <p id="dash-date" class="text-sm opacity-60">Friday, June 20 · 2:34 PM</p>
       </div>
 
-      <!-- Large Temperature -->
-      <div class="text-center my-6 fade-in fade-d1">
-        <p class="text-[7.5rem] font-extralight leading-none tracking-tight" id="dash-temp">72°<span class="text-5xl font-light">F</span></p>
+      <!-- Large Temperature — Minimalist: thin weight, larger size -->
+      <div class="text-center my-8 fade-in fade-d1">
+        <p class="text-[9rem] md:text-[10rem] font-light leading-none tracking-tighter" style="font-weight:300;" id="dash-temp">72°<span class="text-5xl font-light" style="font-weight:300;">F</span></p>
       </div>
 
       <!-- Condition -->
       <div class="flex items-center justify-center gap-3 mb-10 fade-in fade-d1">
         <img id="dash-icon" src="https://openweathermap.org/img/wn/02d@2x.png" alt="weather" class="w-12 h-12 -my-2" />
-        <span id="dash-condition" class="text-xl font-medium opacity-90">Partly Cloudy</span>
+        <span id="dash-condition" class="text-xl font-normal opacity-80">Partly Cloudy</span>
       </div>
 
-      <!-- Stat Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 fade-in fade-d2">
+      <!-- Stat Cards — Minimalist: no backgrounds, no borders, just content on the canvas -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-16 mb-14 fade-in fade-d2">
         <!-- Wind -->
-        <div class="glass-panel p-5 text-center">
-          <i data-lucide="wind" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
+        <div class="py-4 text-center">
+          <i data-lucide="wind" class="w-5 h-5 mx-auto mb-3 opacity-50"></i>
           <p class="swiss-label mb-1">Viento</p>
-          <p class="text-xl font-semibold" id="dash-wind">12 km/h</p>
+          <p class="text-xl font-normal" id="dash-wind">12 km/h</p>
         </div>
         <!-- Humidity -->
-        <div class="glass-panel p-5 text-center">
-          <i data-lucide="droplets" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
+        <div class="py-4 text-center">
+          <i data-lucide="droplets" class="w-5 h-5 mx-auto mb-3 opacity-50"></i>
           <p class="swiss-label mb-1">Humedad</p>
-          <p class="text-xl font-semibold" id="dash-humidity">65%</p>
+          <p class="text-xl font-normal" id="dash-humidity">65%</p>
         </div>
         <!-- UV Index -->
-        <div class="glass-panel p-5 text-center">
-          <i data-lucide="sun" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
+        <div class="py-4 text-center">
+          <i data-lucide="sun" class="w-5 h-5 mx-auto mb-3 opacity-50"></i>
           <p class="swiss-label mb-1">Índice UV</p>
-          <p class="text-xl font-semibold" id="dash-uv">6</p>
+          <p class="text-xl font-normal" id="dash-uv">6</p>
         </div>
         <!-- Feels Like -->
-        <div class="glass-panel p-5 text-center">
-          <i data-lucide="thermometer" class="w-5 h-5 mx-auto mb-2 opacity-60"></i>
+        <div class="py-4 text-center">
+          <i data-lucide="thermometer" class="w-5 h-5 mx-auto mb-3 opacity-50"></i>
           <p class="swiss-label mb-1">Sensación</p>
-          <p class="text-xl font-semibold" id="dash-feels">20°C</p>
+          <p class="text-xl font-normal" id="dash-feels">20°C</p>
         </div>
       </div>
 
@@ -463,7 +531,7 @@
       <div class="glass-panel p-6 fade-in fade-d4">
         <p class="swiss-label mb-4">Calidad del Aire</p>
         <div class="flex items-center justify-between mb-3">
-          <span class="text-2xl font-bold" id="aqi-value">42</span>
+          <span class="text-2xl font-normal" id="aqi-value">42</span>
           <span class="text-sm font-medium px-3 py-1 rounded-full bg-green-500/20 text-green-300" id="aqi-label">Good</span>
         </div>
         <div class="aqi-bar">
@@ -533,12 +601,12 @@
         <!-- Hourly Forecast Chart -->
         <div class="mb-10">
           <p class="swiss-label mb-5">Previsión por Horas</p>
-          <div class="glass-panel p-5 overflow-hidden">
-            <svg id="hourly-chart" class="w-full" height="160" viewBox="0 0 800 160" preserveAspectRatio="none">
+          <div class="p-2 overflow-hidden">
+            <svg id="hourly-chart" class="w-full" height="180" viewBox="0 0 800 180" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
-                  <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+                  <stop offset="0%" stop-color="rgba(255,255,255,0.30)"/>
+                  <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
                 </linearGradient>
               </defs>
             </svg>
@@ -549,7 +617,7 @@
         <!-- 10-Day Forecast List -->
         <div>
           <p class="swiss-label mb-4">Próximos 10 Días</p>
-          <div class="glass-panel divide-y divide-white/5" id="fc-daily-list">
+          <div class="divide-y divide-white/5" id="fc-daily-list">
             <!-- Populated by JS -->
           </div>
         </div>
@@ -565,17 +633,11 @@
        ================================================================ -->
   <section id="view-radar" class="view">
     <div class="radar-map">
-      <!-- Grid -->
-      <div class="radar-grid"></div>
-
-      <!-- Simulated city markers — positioned by JS -->
-      <div id="radar-markers"></div>
-
-      <!-- Precipitation overlay -->
-      <div class="radar-precipitation" id="radar-precip"></div>
+      <!-- Leaflet Map Container -->
+      <div id="leaflet-radar-map"></div>
 
       <!-- Zoom Controls -->
-      <div class="absolute top-4 right-4 flex flex-col gap-2 z-10">
+      <div class="absolute top-4 right-4 flex flex-col gap-2" style="z-index:1000;">
         <button class="glass-panel w-10 h-10 flex items-center justify-center hover:bg-white/15 transition" id="radar-zoom-in">
           <i data-lucide="plus" class="w-4 h-4"></i>
         </button>
@@ -585,7 +647,7 @@
       </div>
 
       <!-- Legend -->
-      <div class="absolute bottom-28 left-4 glass-panel p-4 z-10 text-xs space-y-2">
+      <div class="absolute bottom-28 left-4 glass-panel p-4 text-xs space-y-2" style="z-index:1000;">
         <p class="swiss-label mb-2">Precipitación</p>
         <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-blue-400/60"></span> Ligera</div>
         <div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-purple-400/70"></span> Moderada</div>
@@ -594,7 +656,7 @@
       </div>
 
       <!-- Bottom Time Controls -->
-      <div class="absolute bottom-0 left-0 right-0 glass-nav p-4 z-10">
+      <div class="absolute bottom-0 left-0 right-0 glass-nav p-4" style="z-index:1000;">
         <div class="max-w-3xl mx-auto">
           <!-- Time Labels -->
           <div class="flex items-center gap-4 mb-3">
@@ -627,7 +689,7 @@
     <div class="max-w-5xl mx-auto px-6 pt-8 pb-16">
 
       <!-- Header -->
-      <h2 class="text-2xl font-bold mb-6">Ciudades Guardadas</h2>
+      <h2 class="text-2xl font-normal mb-6">Ciudades Guardadas</h2>
 
       <!-- Search Bar -->
       <div class="relative mb-5">
@@ -940,7 +1002,7 @@
 
     document.getElementById('dash-city').textContent     = `${data.name}, ${data.sys.country}`;
     document.getElementById('dash-date').textContent     = formatDate(data.dt, tz);
-    document.getElementById('dash-temp').innerHTML       = `${Math.round(data.main.temp)}°<span class="text-5xl font-light">C</span>`;
+    document.getElementById('dash-temp').innerHTML       = `${Math.round(data.main.temp)}°<span class="text-5xl font-light" style="font-weight:300;">C</span>`;
     document.getElementById('dash-condition').textContent = capitalize(w.description);
     document.getElementById('dash-icon').src             = iconUrl(w.icon);
     document.getElementById('dash-wind').textContent     = `${Math.round(data.wind.speed)} km/h`;
@@ -973,11 +1035,11 @@
       const fcTz  = forecast.city?.timezone ?? tz;
       items.forEach((item, i) => {
         const card = document.createElement('div');
-        card.className = 'glass-panel flex-shrink-0 w-[80px] py-4 px-2 text-center';
+        card.className = 'flex-shrink-0 w-[80px] py-4 px-2 text-center';
         card.innerHTML = `
           <p class="text-xs opacity-50 mb-2">${i === 0 ? 'Ahora' : formatHour(item.dt, fcTz)}</p>
           <img src="${iconUrl(item.weather[0].icon)}" class="w-8 h-8 mx-auto mb-1" alt="" />
-          <p class="text-sm font-semibold">${formatTemp(item.main.temp)}</p>
+          <p class="text-sm font-normal">${formatTemp(item.main.temp)}</p>
         `;
         hourlyContainer.appendChild(card);
       });
@@ -1005,7 +1067,7 @@
     document.getElementById('fc-sunrise').textContent = formatTime24(sr, tz);
     document.getElementById('fc-sunset').textContent  = formatTime24(ss, tz);
 
-    // Hourly chart (simple SVG line)
+    // Hourly chart — smooth area chart with cubic bezier interpolation
     const chartSvg    = document.getElementById('hourly-chart');
     const chartLabels = document.getElementById('chart-labels');
     const items  = forecast.list.slice(0, 8);
@@ -1013,7 +1075,7 @@
     const minT   = Math.min(...temps) - 2;
     const maxT   = Math.max(...temps) + 2;
     const range  = maxT - minT || 1;
-    const W = 800, H = 140, padX = 30, padY = 20;
+    const W = 800, H = 160, padX = 30, padY = 25;
 
     // Build points
     const pts = temps.map((t, i) => {
@@ -1022,20 +1084,39 @@
       return { x, y, t };
     });
 
-    const lineD = pts.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ');
+    // Smooth cubic bezier path (Catmull-Rom → Bezier)
+    function smoothLine(points) {
+      if (points.length < 2) return `M${points[0].x},${points[0].y}`;
+      let d = `M${points[0].x},${points[0].y}`;
+      for (let i = 0; i < points.length - 1; i++) {
+        const p0 = points[Math.max(0, i - 1)];
+        const p1 = points[i];
+        const p2 = points[i + 1];
+        const p3 = points[Math.min(points.length - 1, i + 2)];
+        const tension = 0.35;
+        const cp1x = p1.x + (p2.x - p0.x) * tension;
+        const cp1y = p1.y + (p2.y - p0.y) * tension;
+        const cp2x = p2.x - (p3.x - p1.x) * tension;
+        const cp2y = p2.y - (p3.y - p1.y) * tension;
+        d += ` C${cp1x},${cp1y} ${cp2x},${cp2y} ${p2.x},${p2.y}`;
+      }
+      return d;
+    }
+
+    const lineD = smoothLine(pts);
     const areaD = lineD + ` L${pts[pts.length-1].x},${H} L${pts[0].x},${H} Z`;
 
     // Keep <defs>, clear rest
     const defs = chartSvg.querySelector('defs').outerHTML;
     chartSvg.innerHTML = defs;
 
-    // Area
+    // Area fill (gradient from 30% opacity to 0%)
     const area = document.createElementNS('http://www.w3.org/2000/svg','path');
     area.setAttribute('d', areaD);
     area.setAttribute('class', 'chart-area');
     chartSvg.appendChild(area);
 
-    // Line
+    // Smooth line
     const line = document.createElementNS('http://www.w3.org/2000/svg','path');
     line.setAttribute('d', lineD);
     line.setAttribute('class', 'chart-line');
@@ -1045,14 +1126,15 @@
     pts.forEach(p => {
       const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
       circle.setAttribute('cx', p.x); circle.setAttribute('cy', p.y);
-      circle.setAttribute('r', 4); circle.setAttribute('class', 'chart-dot');
+      circle.setAttribute('r', 3.5); circle.setAttribute('class', 'chart-dot');
       chartSvg.appendChild(circle);
 
       const text = document.createElementNS('http://www.w3.org/2000/svg','text');
-      text.setAttribute('x', p.x); text.setAttribute('y', p.y - 12);
+      text.setAttribute('x', p.x); text.setAttribute('y', p.y - 14);
       text.setAttribute('text-anchor', 'middle');
-      text.setAttribute('fill', 'rgba(255,255,255,0.7)');
+      text.setAttribute('fill', 'rgba(255,255,255,0.6)');
       text.setAttribute('font-size', '11');
+      text.setAttribute('font-weight', '400');
       text.textContent = formatTemp(p.t);
       chartSvg.appendChild(text);
     });
@@ -1110,16 +1192,16 @@
       const row = document.createElement('div');
       row.className = 'forecast-day';
       row.innerHTML = `
-        <span class="w-24 text-sm font-medium ${idx===0?'text-white':'opacity-70'}">${dayName}</span>
+        <span class="w-24 text-sm font-normal ${idx===0?'text-white':'opacity-70'}">${dayName}</span>
         <img src="${iconUrl(dayIcon)}" class="w-8 h-8 mx-3" alt="" />
-        <span class="w-10 text-sm font-semibold text-right">${hi}°</span>
+        <span class="w-10 text-sm font-normal text-right">${hi}°</span>
         <div class="temp-bar-track mx-4">
           <div class="temp-bar-fill" style="left:${barLeft}%; width:${Math.max(barWidth,8)}%"></div>
         </div>
-        <span class="w-10 text-sm opacity-50">${lo}°</span>
-        <div class="flex items-center gap-1 ml-auto opacity-50">
+        <span class="w-10 text-sm font-normal opacity-50">${lo}°</span>
+        <div class="flex items-center gap-1 ml-auto opacity-40">
           <i data-lucide="droplets" class="w-3 h-3"></i>
-          <span class="text-xs">${pop}%</span>
+          <span class="text-xs font-normal">${pop}%</span>
         </div>
       `;
       listEl.appendChild(row);
@@ -1131,39 +1213,85 @@
   /* ============================================================
      9. RENDER — RADAR
      ============================================================ */
+  let radarMap = null;
+  let radarPrecipLayer = null;
+
   function renderRadar() {
-    const markersEl = document.getElementById('radar-markers');
-    markersEl.innerHTML = '';
+    const mapContainer = document.getElementById('leaflet-radar-map');
 
-    // Ciudades españolas — posicionadas sobre la Península Ibérica
-    const cities = [
-      { name: 'Valencia',   x: '65%', y: '52%' },
-      { name: 'Madrid',     x: '42%', y: '42%' },
-      { name: 'Barcelona',  x: '72%', y: '28%' },
-      { name: 'Sevilla',    x: '28%', y: '72%' },
-      { name: 'Bilbao',     x: '48%', y: '18%' },
-      { name: 'Zaragoza',   x: '58%', y: '32%' },
-      { name: 'Málaga',     x: '36%', y: '84%' },
-      { name: 'Alicante',   x: '62%', y: '65%' },
-      { name: 'Murcia',     x: '60%', y: '72%' },
-      { name: 'Valladolid', x: '38%', y: '30%' },
-      { name: 'A Coruña',   x: '18%', y: '15%' },
-      { name: 'Palma',      x: '80%', y: '62%' },
-    ];
+    // Initialize Leaflet map only once
+    if (!radarMap) {
+      radarMap = L.map(mapContainer, {
+        center: [39.47, -0.38],  // Valencia
+        zoom: 6,
+        zoomControl: false,
+        attributionControl: false,
+      });
 
-    cities.forEach(c => {
-      const dot = document.createElement('div');
-      dot.className = 'radar-city-dot';
-      dot.style.left = c.x; dot.style.top = c.y;
-      markersEl.appendChild(dot);
+      // Dark minimalist tile layer — CartoDB Dark Matter (low contrast, thin borders)
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
+        maxZoom: 18,
+      }).addTo(radarMap);
 
-      const label = document.createElement('div');
-      label.className = 'radar-city-name';
-      label.style.left = `calc(${c.x} + 12px)`;
-      label.style.top  = `calc(${c.y} - 3px)`;
-      label.textContent = c.name;
-      markersEl.appendChild(label);
-    });
+      // Add a subtle labels-only layer on top (thin text, low contrast)
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+        maxZoom: 18,
+        opacity: 0.5,
+      }).addTo(radarMap);
+
+      // Add precipitation overlay using RainViewer (free, no API key)
+      // Fetch latest available radar timestamp, then add tile layer
+      fetch('https://api.rainviewer.com/public/weather-maps.json')
+        .then(res => res.json())
+        .then(data => {
+          const latest = data.radar?.past?.slice(-1)?.[0]?.path;
+          if (latest) {
+            radarPrecipLayer = L.tileLayer(
+              `https://tilecache.rainviewer.com${latest}/256/{z}/{x}/{y}/2/1_1.png`,
+              { maxZoom: 18, opacity: 0.55, errorTileUrl: '' }
+            );
+            radarPrecipLayer.addTo(radarMap);
+          }
+        })
+        .catch(() => {
+          // Silent fallback — map works without precipitation layer
+        });
+
+      // City markers — minimalist circles with labels
+      const cities = [
+        { name: 'Valencia',   lat: 39.4699, lon: -0.3763 },
+        { name: 'Madrid',     lat: 40.4168, lon: -3.7038 },
+        { name: 'Barcelona',  lat: 41.3851, lon:  2.1734 },
+        { name: 'Sevilla',    lat: 37.3886, lon: -5.9823 },
+        { name: 'Bilbao',     lat: 43.2627, lon: -2.9253 },
+        { name: 'Zaragoza',   lat: 41.6488, lon: -0.8891 },
+        { name: 'Málaga',     lat: 36.7213, lon: -4.4214 },
+        { name: 'Alicante',   lat: 38.3452, lon: -0.4810 },
+        { name: 'A Coruña',   lat: 43.3623, lon: -8.4115 },
+        { name: 'Palma',      lat: 39.5696, lon:  2.6502 },
+      ];
+
+      const dotIcon = L.divIcon({
+        className: '',
+        html: '<div style="width:6px;height:6px;background:rgba(255,255,255,0.7);border-radius:50%;box-shadow:0 0 6px rgba(255,255,255,0.3);"></div>',
+        iconSize: [6, 6],
+        iconAnchor: [3, 3],
+      });
+
+      cities.forEach(c => {
+        L.marker([c.lat, c.lon], { icon: dotIcon, interactive: false }).addTo(radarMap);
+        L.tooltip({ permanent: true, direction: 'right', offset: [8, 0], className: 'radar-leaflet-tooltip' })
+          .setLatLng([c.lat, c.lon])
+          .setContent(c.name)
+          .addTo(radarMap);
+      });
+    } else {
+      radarMap.invalidateSize();
+    }
+
+    // Zoom controls
+    document.getElementById('radar-zoom-in').onclick = () => radarMap.zoomIn();
+    document.getElementById('radar-zoom-out').onclick = () => radarMap.zoomOut();
 
     // Radar time slider
     const slider = document.getElementById('radar-slider');
@@ -1177,12 +1305,6 @@
       const m = totalMins % 60;
       const ampm = h >= 12 ? 'PM' : 'AM';
       timeLabel.textContent = `${h%12||12}:${String(m).padStart(2,'0')} ${ampm}`;
-
-      // Move precipitation overlay slightly
-      const precip = document.getElementById('radar-precip');
-      const offsetX = (val - 6) * 4;
-      const offsetY = (val - 6) * 2;
-      precip.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
     }
 
     slider.addEventListener('input', () => updateRadarTime(parseInt(slider.value)));

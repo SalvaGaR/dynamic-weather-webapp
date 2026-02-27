@@ -1,152 +1,36 @@
-# 🌤️ Tiempo Valencia · Neo-Glass Weather
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Una aplicación meteorológica en tiempo real con diseño glassmorphism, centrada en **Valencia y España**. Usa datos meteorológicos reales de la API pública de **Open-Meteo** — sin necesidad de clave de acceso.
+## Getting Started
 
-**[Ver demo en GitHub Pages →](https://salvagar.github.io/dynamic-weather-webapp/)**
-
----
-
-## ¿Qué es?
-
-Aplicación web de una sola página (SPA) que muestra el tiempo actual y la previsión para las principales ciudades de España. Construida con HTML, CSS y JavaScript puros — sin frameworks, sin dependencias de servidor.
-
-### Características
-
-- **Tiempo real** — datos actualizados directamente desde Open-Meteo
-- **Centrada en España** — Valencia como ciudad principal, con Madrid, Barcelona, Sevilla, Bilbao y más
-- **Sin API key** — la API de Open-Meteo es completamente gratuita y pública
-- **Previsión a 10 días** — temperaturas máximas/mínimas, probabilidad de lluvia
-- **Previsión horaria** — gráfico de temperatura por horas con icono meteorológico
-- **Calidad del aire** — índice US AQI en tiempo real (Copernicus / Open-Meteo)
-- **Radar visual** — mapa estilizado con ciudades españolas y control de capas
-- **Búsqueda de ciudades** — geocodificación en español vía Open-Meteo Geocoding API
-- **Geolocalización** — botón para usar la ubicación actual del dispositivo
-- **Diseño glassmorphism** — fondos dinámicos según la condición meteorológica
-- **Totalmente responsivo** — adaptado a móvil, tablet y escritorio
-- **Desplegado en GitHub Pages** — con GitHub Actions
-
----
-
-## Fuentes de datos
-
-| Dato | API | Coste |
-|------|-----|-------|
-| Tiempo actual y previsión | [Open-Meteo Forecast API](https://open-meteo.com/en/docs) | Gratuito |
-| Geocodificación de ciudades | [Open-Meteo Geocoding API](https://open-meteo.com/en/docs/geocoding-api) | Gratuito |
-| Calidad del aire (AQI) | [Open-Meteo Air Quality API](https://open-meteo.com/en/docs/air-quality-api) | Gratuito |
-
-> **Similar a AEMET Open Data** en cuanto a precisión para España — Open-Meteo integra modelos ECMWF, GFS, Copernicus y otros de alta calidad europeos.
-
----
-
-## Vistas
-
-### Inicio
-- Temperatura actual en °C
-- Condición meteorológica con icono
-- Viento (km/h), Humedad (%), Índice UV, Sensación térmica
-- Previsión horaria scrollable
-- Calidad del aire con indicador visual
-
-### Previsión
-- Gráfico SVG de temperatura por horas
-- Lista de los próximos 10 días con barras de temperatura
-- Panel lateral con horarios de amanecer/atardecer
-
-### Radar
-- Mapa estilizado centrado en la Península Ibérica
-- Marcadores de ciudades principales
-- Animación de precipitación con control de tiempo
-- Capas: Precipitación, Temperatura, Viento, Nubes
-
-### Ciudades
-- Tarjetas de ciudades guardadas con temperatura en tiempo real
-- Buscador de ciudades con autocompletado en español
-- Botón de ubicación actual
-
----
-
-## Tecnologías
-
-- **HTML5 / CSS3 / JavaScript** (ES2022+) — sin frameworks
-- **[Tailwind CSS](https://tailwindcss.com/)** via CDN
-- **[Lucide Icons](https://lucide.dev/)** via CDN
-- **[Google Fonts — Inter](https://fonts.google.com/specimen/Inter)**
-- **[Open-Meteo](https://open-meteo.com/)** — API meteorológica de código abierto
-
----
-
-## Despliegue local
+First, run the development server:
 
 ```bash
-# Clona el repositorio
-git clone https://github.com/SalvaGaR/dynamic-weather-webapp.git
-cd dynamic-weather-webapp
-
-# Abre directamente en el navegador
-open index.html
-
-# O usa un servidor local simple
-npx serve .
-# o
-python3 -m http.server 8080
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-No se necesita proceso de build ni variables de entorno.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
----
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Despliegue en GitHub Pages
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-El proyecto incluye un workflow de **GitHub Actions** que despliega automáticamente en GitHub Pages cada vez que se hace push a la rama `main`.
+## Learn More
 
-### Configuración
+To learn more about Next.js, take a look at the following resources:
 
-1. Ve a **Settings → Pages** en tu repositorio de GitHub
-2. En **Source**, selecciona **GitHub Actions**
-3. Haz push a `main` — el workflow se ejecuta automáticamente
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-El archivo de workflow está en `.github/workflows/pages.yml`.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### URL del sitio
+## Deploy on Vercel
 
-```
-https://<tu-usuario>.github.io/dynamic-weather-webapp/
-```
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
----
-
-## Estructura del proyecto
-
-```
-dynamic-weather-webapp/
-├── index.html                  # Aplicación completa (HTML + CSS + JS)
-├── .github/
-│   └── workflows/
-│       └── pages.yml           # GitHub Actions: despliegue a GitHub Pages
-├── LICENSE                     # MIT License
-└── README.md                   # Este archivo
-```
-
----
-
-## Variables y configuración
-
-No se necesita ninguna variable de entorno ni clave de API. Todo funciona de forma inmediata.
-
-Para cambiar la ciudad por defecto, edita estas líneas en `index.html`:
-
-```javascript
-let state = {
-  currentCity: 'Valencia',
-  currentLat : 39.4699,
-  currentLon : -0.3763,
-  // ...
-};
-```
-
----
-
-## Licencia
-
-[MIT](LICENSE) — libre para usar, modificar y distribuir.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
